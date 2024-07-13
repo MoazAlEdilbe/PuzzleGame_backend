@@ -1,14 +1,25 @@
-import { Schema, Document } from 'mongoose';
+import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Score } from './score.schema';
+import { Types } from 'mongoose';
 
-export const UserSchema = new Schema({
-  username: { type: String, required: true },
-  scores: [{ type: Number }],
-  createdAt: { type: Date, default: Date.now },
-});
+export type UserDocument = User & Document;
 
-export interface User extends Document {
+
+@Schema()
+export class User {
   id: string;
+
+  @Prop({ required: true, unique: true })
   username: string;
-  scores: number[];
+
+  @Prop({ type: [{ type: Types.ObjectId, ref: 'Score' }] })
+  scores: Types.Array<Score>;
+
+  @Prop({ default: Date.now })
   createdAt: Date;
+
 }
+
+export const UserSchema = SchemaFactory.createForClass(User);
+
+

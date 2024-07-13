@@ -5,6 +5,10 @@ export type PuzzleDocument = Puzzle & Document;
 
 @Schema()
 export class Puzzle {
+
+    @Prop({ required: true })
+    type: string;
+
     @Prop({ required: true })
     data: string;
 

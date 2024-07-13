@@ -1,3 +1,4 @@
+// src/puzzles/puzzles.controller.ts
 import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { PuzzlesService } from './puzzles.service';
 import { CreatePuzzleDto } from './dto/create-puzzle.dto';
@@ -7,24 +8,22 @@ export class PuzzlesController {
     constructor(private readonly puzzlesService: PuzzlesService) { }
 
     @Post()
-    create(@Body() createPuzzleDto: CreatePuzzleDto) {
+    async create(@Body() createPuzzleDto: CreatePuzzleDto) {
         return this.puzzlesService.create(createPuzzleDto);
     }
 
     @Get()
-    findAll() {
+    async findAll() {
         return this.puzzlesService.findAll();
     }
 
-    @Get('/generate')
-    generate(@Query('difficulty') difficulty: string) {
-        const puzzleDto = this.puzzlesService.generatePuzzle(difficulty);
-        console.log(puzzleDto);
-        return this.puzzlesService.create(puzzleDto);
+    @Get('generate')
+    async generate(@Query('type') type: string, @Query('difficulty') difficulty: string) {
+        return this.puzzlesService.generatePuzzle(type, difficulty);
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
+    async findOne(@Param('id') id: string) {
         return this.puzzlesService.findOne(id);
     }
 

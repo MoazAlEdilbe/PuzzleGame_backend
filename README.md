@@ -1,73 +1,113 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# PuzzleGame Backend
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project is the backend for the PuzzleGame application, built with NestJS. It provides APIs for generating puzzles, managing users, handling scores, and displaying the leaderboard.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Dynamic Puzzle Generation**: Generate puzzles based on type and difficulty.
+- **User Management**: Manage user data.
+- **Score Handling**: Submit and fetch scores.
+- **Leaderboard**: Display top scores.
 
-## Installation
+## Project Structure
 
-```bash
-$ npm install
+```
+src/
+  modules/
+    users/
+      users.controller.ts
+      users.module.ts
+      users.service.ts
+    puzzles/
+      puzzles.controller.ts
+      puzzles.module.ts
+      puzzles.service.ts
+    score/
+      score.controller.ts
+      score.module.ts
+      score.service.ts
+  schemas/
+    puzzle.schema.ts
+    score.schema.ts
+    users.schema.ts
+
+  app.module.ts
+  main.ts
+README.md
+package.json
 ```
 
-## Running the app
+## Setup and Installation
 
-```bash
-# development
-$ npm run start
+1. **Clone the Repository**:
 
-# watch mode
-$ npm run start:dev
+   ```sh
+   git clone https://github.com/MoazAlEdilbe/PuzzleGame_backend.git
+   cd PuzzleGame_backend
+   ```
 
-# production mode
-$ npm run start:prod
-```
+2. **Install Dependencies**:
 
-## Test
+   ```sh
+   npm install
+   ```
 
-```bash
-# unit tests
-$ npm run test
+3. **Configure Environment Variables**:
 
-# e2e tests
-$ npm run test:e2e
+   Create a `.env` file:
 
-# test coverage
-$ npm run test:cov
-```
+   ```env
+   MONGO_URI=mongodb://localhost:27017/puzzle-game
+   PORT=8080
+   ```
 
-## Support
+4. **Run the Application**:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+   ```sh
+   npm run start
+   ```
 
-## Stay in touch
+## Modules Overview
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### User Module
 
-## License
+- **user.controller.ts**: Handles user-related API endpoints.
+- **user.service.ts**: Contains business logic for user operations.
+- **user.schema.ts**: Defines the User schema.
 
-Nest is [MIT licensed](LICENSE).
+### Puzzle Module
+
+- **puzzle.controller.ts**: Handles puzzle-related API endpoints.
+- **puzzle.service.ts**: Contains business logic for puzzle generation.
+- **puzzle.schema.ts**: Defines the Puzzle schema.
+
+### Score Module
+
+- **score.controller.ts**: Handles score-related API endpoints.
+- **score.service.ts**: Contains business logic for score operations.
+- **score.schema.ts**: Defines the Score schema.
+
+## API Endpoints
+
+### Puzzles
+
+- **Generate Puzzle**: `GET /puzzles/generate?type=<type>&difficulty=<difficulty>`
+
+### Users
+
+- **Create User**: `POST /user`
+- **Get User Scores**: `GET /user/:username/scores`
+
+### Scores
+
+- **Get Leaderboard**: `GET /score/leaderboard`
+- **Add Score**: `POST /score`
+- **Get Scores by User**: `GET /score/user/:userId`
+
+....
+....
+....
+---
+
+This README provides an overview of the project, setup instructions, a summary of the modules, and the API endpoints used.

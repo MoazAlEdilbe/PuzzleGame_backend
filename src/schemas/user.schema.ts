@@ -1,4 +1,3 @@
-// src/modules/users/schemas/user.schema.ts
 import { Schema, Document } from 'mongoose';
 
 export const UserSchema = new Schema({
